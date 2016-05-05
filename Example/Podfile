@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'MJControllerManager_Example', :exclusive => true do
+  pod 'MJControllerManager', :path => '../'
+end
+
+target 'MJControllerManager_Tests', :exclusive => true do
+  pod 'MJControllerManager', :path => '../'
+
+  
+end
