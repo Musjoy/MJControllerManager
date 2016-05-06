@@ -32,6 +32,8 @@
 
 #pragma mark - ViewCotroller
 
++ (instancetype)shareInstance;
+
 
 + (UIViewController *)getRootViewController;
 

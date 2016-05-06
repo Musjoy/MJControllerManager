@@ -38,7 +38,7 @@ static MBProgressHUD *s_loadingProgress = nil;
 
 @implementation MJControllerManager
 
-+ (instancetype)shareInstant
++ (instancetype)shareInstance
 {
     if (s_controllerManager == nil) {
         s_controllerManager = [[self.class alloc] init];
@@ -191,7 +191,7 @@ static MBProgressHUD *s_loadingProgress = nil;
 
 + (__kindof UIViewController *)getUniqueViewControllerWithName:(NSString *)aVCName
 {
-    NSMutableDictionary *dicVCs = [[self shareInstant] dicVCs];
+    NSMutableDictionary *dicVCs = [[self shareInstance] dicVCs];
     UIViewController *aVC = [dicVCs objectForKey:aVCName];
     if (aVC) {
         return aVC;
