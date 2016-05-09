@@ -349,7 +349,7 @@ static MBProgressHUD *s_loadingProgress = nil;
 
 + (NSInteger)startLoading:(NSString *)labelText detailText:(NSString *)detailText
 {
-    return [self startLoading:labelText];
+    return [self startLoading:[labelText stringByAppendingFormat:@"\n%@", detailText]];
 }
 
 + (void)setLoadingRequestId:(NSString *)requestId needCancel:(BOOL)needCancel atIndex:(NSInteger)aIndex
@@ -363,7 +363,7 @@ static MBProgressHUD *s_loadingProgress = nil;
     LogTrace(@"{Loading} stop");
     MJLoadingView *viewLoading = [self loadingView];
     
-    [viewLoading stopLoading];
+    [viewLoading stopAllLoading];
 }
 
 + (void)stopLoadingAtIndex:(NSInteger)aIndex
@@ -403,7 +403,7 @@ static MBProgressHUD *s_loadingProgress = nil;
     };
     [[self loadingWindow] addSubview:theProgress];
     [theProgress show:YES];
-    return 1;
+    return 0;
 }
 
 + (void)stopLoading
