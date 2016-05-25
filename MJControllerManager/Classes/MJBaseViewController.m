@@ -8,7 +8,7 @@
 
 #import "MJBaseViewController.h"
 #ifdef MODULE_UM_ANALYSE
-#import "MobClick.h"
+#import HEADER_UM_ANALYSE
 #endif
 
 @interface MJBaseViewController ()
