@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "MJControllerManager"
-  s.version          = "0.1.0"
+  s.version          = "0.1.1"
   s.summary          = "This module contain base class of view controller and some common use function."
 
   s.homepage         = "https://github.com/Musjoy/MJControllerManager"
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   }
 
   s.dependency 'ActionProtocol'
-  s.dependency 'ModuleCapability', '~> 0.1.1'
+  s.dependency 'ModuleCapability', '~> 0.1.2'
   s.prefix_header_contents = '#import "ModuleCapability.h"'
 
 end
