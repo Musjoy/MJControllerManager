@@ -7,13 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import HEADER_CONTROLLER_MANAGER
 #ifdef MODULE_UTILS
 #import "Utils.h"
-#endif
-#ifdef MODULE_SUB_CONTROLLER_MANAGER
-#import "ControllerManager.h"
-#else
-#import "MJControllerManager.h"
 #endif
 
 #ifndef sLoading
