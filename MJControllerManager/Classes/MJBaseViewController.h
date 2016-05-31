@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIViewController+Base.h"
 #import HEADER_CONTROLLER_MANAGER
 #ifdef MODULE_UTILS
 #import "Utils.h"
