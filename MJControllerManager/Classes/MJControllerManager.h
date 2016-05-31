@@ -72,9 +72,11 @@
 /**
  *	@brief	提示
  *
- *	@param 	msg 	提示信息
+ *	@param 	title       提示标题
+ *	@param 	massage     提示信息
  */
-+ (void)alertMsg:(NSString*)msg;
++ (void)alertMsg:(NSString*)massage;
++ (void)alert:(NSString *)title message:(NSString *)massage;
 
 /**
  *	@brief	弹出底部的提示文字
