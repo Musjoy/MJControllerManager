@@ -316,13 +316,13 @@ static MBProgressHUD *s_loadingProgress = nil;
 
 + (void)alertMsg:(NSString *)massage
 {
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:massage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:massage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
 }
 
 + (void)alert:(NSString *)title message:(NSString *)massage
 {
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:title message:massage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:title message:massage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
 }
 
