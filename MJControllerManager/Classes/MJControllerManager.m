@@ -64,7 +64,8 @@ static MBProgressHUD *s_loadingProgress = nil;
     UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
     if (keyWindow != topWindow) {
         if (keyWindow.rootViewController
-            && !keyWindow.rootViewController.view.isHidden) {
+            && !keyWindow.rootViewController.view.isHidden
+            && keyWindow.windowLevel <= UIWindowLevelNormal + 10) {
             topWindow = keyWindow;
         }
     }
