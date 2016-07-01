@@ -72,6 +72,12 @@ static MBProgressHUD *s_loadingProgress = nil;
     return topWindow;
 }
 
++ (UIWindow *)mainWindow
+{
+    id<UIApplicationDelegate> delegate = [UIApplication sharedApplication].delegate;
+    return [delegate window];
+}
+
 #pragma mark - ViewCotroller
 
 + (UIViewController *)getRootViewController

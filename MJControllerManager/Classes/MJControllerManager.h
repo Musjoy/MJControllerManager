@@ -34,6 +34,9 @@
 
 + (instancetype)shareInstance;
 
++ (UIWindow *)keyWindow;
+
++ (UIWindow *)mainWindow;
 
 + (UIViewController *)getRootViewController;
 
