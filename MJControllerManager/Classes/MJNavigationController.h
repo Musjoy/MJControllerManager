@@ -18,6 +18,10 @@
 
 @property (nonatomic, nonatomic) BOOL isViewHadShow;        // 是否已经显示过
 
+- (void)reloadTheme;
+
+#pragma mark -
+
 - (void)showBackButtonWith:(UIViewController *)viewController;
 - (void)showBackButtonWith:(UIViewController *)viewController andAction:(SEL)action;
 - (UIBarButtonItem *)showLeftButtonWith:(UIViewController *)viewController image:(UIImage *)image action:(SEL)action;

@@ -19,10 +19,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-#ifdef kAppActiveColor
-    [self.view setTintColor:kAppActiveColor];
+    
+    [self reloadTheme];
+    
+#ifdef MODULE_THEME_MANAGER
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTheme) name:kNoticThemeChanged object:nil];
 #endif
+    
 }
 
 
@@ -85,6 +88,71 @@
     }
 }
 
+
+#pragma mark - Theme
+
+- (void)reloadTheme
+{
+#ifdef MODULE_THEME_MANAGER
+    UIColor *bgColor = [MJThemeManager colorFor:kThemeBgColor];
+    if (bgColor) {
+        self.view.backgroundColor = bgColor;
+    }
+    UIColor *mainColor = [MJThemeManager colorFor:kThemeMainColor];
+    if (mainColor) {
+        [self.view setTintColor:mainColor];
+    }
+    UIImage *imgBg = [MJThemeManager curBgImage];
+    if (imgBg) {
+        self.view.layer.contents = (__bridge id _Nullable)(imgBg.CGImage);
+    } else {
+        self.view.layer.contents = nil;
+    }
+    
+    // tableView自动加载
+    if ([self respondsToSelector:@selector(tableView)]) {
+        UITableView *aTableView = [self valueForKey:@"tableView"];
+        [self reloadThemeForTableView:aTableView];
+    }
+#else
+    self.view.backgroundColor = [UIColor whiteColor];
+#ifdef kAppActiveColor
+    [self.view setTintColor:kAppActiveColor];
+#endif
+#endif
+}
+
+- (void)reloadThemeForTableView:(UITableView *)aTableView
+{
+#ifdef MODULE_THEME_MANAGER
+    if (aTableView == nil) {
+        return;
+    }
+    // Cell处理
+    [aTableView setSeparatorColor:[MJThemeManager colorFor:kThemeCellLineColor]];
+    NSArray *arrCells = [aTableView visibleCells];
+    NSMutableDictionary *arrCacheCells = (NSMutableDictionary*)[aTableView valueForKey:@"_reusableTableCells" ];
+    [arrCacheCells removeAllObjects];
+    for (UITableViewCell *aCell in arrCells) {
+        if ([aCell respondsToSelector:@selector(reloadTheme)]) {
+            [aCell reloadTheme];
+        }
+    }
+    // Loading处理
+#ifdef MODULE_UTILS
+    UIColor *refreshColor = [MJThemeManager colorFor:kThemeRefreshColor];
+    if (aTableView.header) {
+        [aTableView.header setTintColor:refreshColor];
+    }
+    if (aTableView.footer) {
+        [aTableView.footer setTintColor:refreshColor];
+    }
+#endif
+#else
+#endif
+}
+
+
 #pragma mark - Keyboard
 
 - (void)keyboardWillChangeFrame:(NSNotification *)notification
@@ -139,9 +207,22 @@
     return UIInterfaceOrientationMaskAll;
 }
 
-//- (BOOL)prefersStatusBarHidden
-//{
-//    return YES;
-//}
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+#ifdef MODULE_THEME_MANAGER
+    return [MJThemeManager curStatusStyle];
+#else
+    return UIStatusBarStyleDefault;
+#endif
+}
+
+#pragma mark - 
+
+- (void)dealloc
+{
+#ifdef MODULE_THEME_MANAGER
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNoticThemeChanged object:nil];
+#endif
+}
 
 @end

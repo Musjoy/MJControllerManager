@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "UIViewController+Base.h"
 #import HEADER_CONTROLLER_MANAGER
+#ifdef MODULE_THEME_MANAGER
+#import "MJThemeManager.h"
+#endif
 #ifdef MODULE_UTILS
 #import "Utils.h"
 #endif
@@ -27,6 +30,9 @@
 
 @property (nonatomic, nonatomic) BOOL isViewHadShow;        // 是否已经显示过
 
+/// 加载主题
+- (void)reloadTheme;
+- (void)reloadThemeForTableView:(UITableView *)aTableView;
 
 /// 键盘即将显示
 - (void)keyboardWillShow:(NSNotification *)notification;

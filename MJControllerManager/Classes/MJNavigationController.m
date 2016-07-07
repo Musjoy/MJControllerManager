@@ -12,6 +12,9 @@
 #ifdef MODULE_UTILS
 #import "Utils.h"
 #endif
+#ifdef MODULE_THEME_MANAGER
+#import "MJThemeManager.h"
+#endif
 
 #define BACK_ITEM_TAG 1000
 
@@ -71,27 +74,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self.view setBackgroundColor:[UIColor whiteColor]];
-    
-#ifdef kNavBgColor
-    [self.navigationBar setBarTintColor:kNavBgColor];
-#endif
-    [self.navigationBar setTintColor:kNavActiveColor];
-
     [self.navigationBar setTranslucent:YES];
 
     self.interactivePopGestureRecognizer.delegate = self;
     
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor clearColor];
-    shadow.shadowOffset = CGSizeMake(0, 0);
-    NSDictionary *textAttr = [NSDictionary dictionaryWithObjectsAndKeys:
-                              kNavActiveColor, NSForegroundColorAttributeName,
-                              //                              kAppActiveColor, NSForegroundColorAttributeName,
-                              //                              [UIFont fontWithName:@"JXiHei" size:17], TextAttributeFont,
-                              //                              [UIFont boldSystemFontOfSize:17], TextAttributeFont,
-                              shadow, NSShadowAttributeName,nil];
-    self.navigationBar.titleTextAttributes = textAttr;
+    [self reloadTheme];
+    
+#ifdef MODULE_THEME_MANAGER
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTheme) name:kNoticThemeChanged object:nil];
+#endif
+    
 }
 
 
@@ -124,6 +116,49 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - 
+
+- (void)reloadTheme
+{
+#ifdef MODULE_THEME_MANAGER
+    // 整体背景色
+    UIColor *bgColor = [MJThemeManager colorFor:kThemeBgColor];
+    [self.view setBackgroundColor:bgColor];
+    // 导航栏主色调设置
+    UIColor *tintColor = [MJThemeManager colorFor:kThemeNavTintColor];
+    [self.navigationBar setTintColor:tintColor];
+    // 导航栏背景色设置
+    UIColor *barBgColor = [MJThemeManager colorFor:kThemeNavBgColor];
+    [self.navigationBar setBarTintColor:barBgColor];
+    // 导航栏title颜色设置
+    UIColor *titleColor = [MJThemeManager colorFor:kThemeNavTitleColor];
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor clearColor];
+    shadow.shadowOffset = CGSizeMake(0, 0);
+    NSDictionary *textAttr = [NSDictionary dictionaryWithObjectsAndKeys:
+                              titleColor, NSForegroundColorAttributeName,
+                              shadow, NSShadowAttributeName,nil];
+    self.navigationBar.titleTextAttributes = textAttr;
+#else
+#ifdef kNavBgColor
+    [self.navigationBar setBarTintColor:kNavBgColor];
+#endif
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.navigationBar setTintColor:kNavActiveColor];
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor clearColor];
+    shadow.shadowOffset = CGSizeMake(0, 0);
+    NSDictionary *textAttr = [NSDictionary dictionaryWithObjectsAndKeys:
+                              kNavActiveColor, NSForegroundColorAttributeName,
+                              //                              kAppActiveColor, NSForegroundColorAttributeName,
+                              //                              [UIFont fontWithName:@"JXiHei" size:17], TextAttributeFont,
+                              //                              [UIFont boldSystemFontOfSize:17], TextAttributeFont,
+                              shadow, NSShadowAttributeName,nil];
+    self.navigationBar.titleTextAttributes = textAttr;
+#endif
+}
+
+#pragma mark -
 
 - (void)showBackButtonWith:(UIViewController *)viewController
 {
@@ -284,5 +319,14 @@
     return [[self topViewController] preferredStatusBarStyle];
 }
 
+
+#pragma mark -
+
+- (void)dealloc
+{
+#ifdef MODULE_THEME_MANAGER
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNoticThemeChanged object:nil];
+#endif
+}
 
 @end
