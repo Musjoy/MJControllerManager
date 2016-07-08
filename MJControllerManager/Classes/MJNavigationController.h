@@ -43,9 +43,9 @@
 
 // The funtion below need be overwrite
 /** 是否可以滑出 */
-- (BOOL)canSlipOut;
+- (BOOL)canSlipOut:(UIGestureRecognizer *)gestureRecognizer;
 /** 是否可以滑入 */
-- (BOOL)canSlipIn;
+- (BOOL)canSlipIn:(UIGestureRecognizer *)gestureRecognizer;
 
 @end
 

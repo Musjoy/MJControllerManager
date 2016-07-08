@@ -32,12 +32,12 @@
     return (MJNavigationController *)viewController;
 }
 
-- (BOOL)canSlipOut
+- (BOOL)canSlipOut:(UIGestureRecognizer *)gestureRecognizer
 {
     return YES;
 }
 
-- (BOOL)canSlipIn
+- (BOOL)canSlipIn:(UIGestureRecognizer *)gestureRecognizer
 {
     return YES;
 }
@@ -291,7 +291,7 @@
     } else {
         UIViewController *lastVC = self.viewControllers.lastObject;
         UIViewController *secondLastVC = self.viewControllers[self.viewControllers.count-2];
-        if ([lastVC canSlipOut] && [secondLastVC canSlipIn]) {
+        if ([lastVC canSlipOut:gestureRecognizer] && [secondLastVC canSlipIn:gestureRecognizer]) {
             return YES;
         } else {
             return NO;
