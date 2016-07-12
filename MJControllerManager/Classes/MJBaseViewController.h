@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "UIViewController+Base.h"
+#ifdef HEADER_CONTROLLER_MANAGER
 #import HEADER_CONTROLLER_MANAGER
+#endif
 #ifdef MODULE_THEME_MANAGER
 #import "MJThemeManager.h"
 #endif

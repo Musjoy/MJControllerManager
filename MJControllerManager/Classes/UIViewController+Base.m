@@ -7,6 +7,7 @@
 //
 
 #import "UIViewController+Base.h"
+#import HEADER_CONTROLLER_MANAGER
 
 @implementation UIViewController (Base)
 

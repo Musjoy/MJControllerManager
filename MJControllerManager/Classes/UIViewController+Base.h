@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import HEADER_CONTROLLER_MANAGER
 
 @interface UIViewController (Base)
 
