@@ -33,6 +33,7 @@
 /// 加载主题
 - (void)reloadTheme;
 - (void)reloadThemeForTableView:(UITableView *)aTableView;
+- (void)reloadThemeForCollectionView:(UICollectionView *)aCollectionView;
 
 /// 键盘即将显示
 - (void)keyboardWillShow:(NSNotification *)notification;

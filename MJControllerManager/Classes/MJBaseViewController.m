@@ -152,6 +152,34 @@
 #endif
 }
 
+- (void)reloadThemeForCollectionView:(UICollectionView *)aCollectionView
+{
+#ifdef MODULE_THEME_MANAGER
+    if (aCollectionView == nil) {
+        return;
+    }
+    // Cell处理
+    NSArray *arrCells = [aCollectionView visibleCells];
+    NSMutableDictionary *arrCacheCells = (NSMutableDictionary*)[aCollectionView valueForKey:@"_cellReuseQueues" ];
+    [arrCacheCells removeAllObjects];
+    for (UITableViewCell *aCell in arrCells) {
+        if ([aCell respondsToSelector:@selector(reloadTheme)]) {
+            [aCell reloadTheme];
+        }
+    }
+    // Loading处理
+#ifdef MODULE_UTILS
+    UIColor *refreshColor = [MJThemeManager colorFor:kThemeRefreshColor];
+    if (aCollectionView.header) {
+        [aCollectionView.header setTintColor:refreshColor];
+    }
+    if (aCollectionView.footer) {
+        [aCollectionView.footer setTintColor:refreshColor];
+    }
+#endif
+#else
+#endif
+}
 
 #pragma mark - Keyboard
 
