@@ -121,6 +121,7 @@
 - (void)reloadTheme
 {
 #ifdef MODULE_THEME_MANAGER
+    [self.navigationBar setBarStyle:[MJThemeManager curStatusStyle]];
     // 整体背景色
     UIColor *bgColor = [MJThemeManager colorFor:kThemeBgColor];
     [self.view setBackgroundColor:bgColor];
