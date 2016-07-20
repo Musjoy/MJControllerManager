@@ -16,7 +16,7 @@
 #endif
 
 // 统计定义
-#ifdef MODULE_UM_ANALYSE
+#ifdef HEADER_UM_ANALYSE
 #import HEADER_UM_ANALYSE
 #ifndef stat_Share
 #define stat_Share              @"Share"
