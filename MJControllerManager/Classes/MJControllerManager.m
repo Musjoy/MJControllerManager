@@ -7,7 +7,7 @@
 //
 
 #import "MJControllerManager.h"
-
+#import HEADER_BASE_VIEW_CONTROLLER
 #ifdef MODULE_TOAST
 #import "MJToast.h"
 #endif
@@ -459,6 +459,9 @@ static MBProgressHUD *s_loadingProgress = nil;
         s_windowLoading = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         [s_windowLoading setBackgroundColor:[UIColor clearColor]];
         s_windowLoading.windowLevel = UIWindowLevelAlert - 100;
+        THEBaseViewController *aBaseVC = [[THEBaseViewController alloc] init];
+        aBaseVC.view.hidden = YES;
+        [s_windowLoading setRootViewController:aBaseVC];
         [s_windowLoading makeKeyAndVisible];
 #ifdef MODULE_LOADING_VIEW
         [s_windowLoading addSubview:[self loadingView]];
