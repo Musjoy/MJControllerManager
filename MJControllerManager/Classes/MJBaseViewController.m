@@ -26,6 +26,29 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTheme) name:kNoticThemeChanged object:nil];
 #endif
     
+    // 配置lytTop和lytBottom
+    if (_lytTop) {
+        NSObject *topLayout = self.topLayoutGuide;
+        UIView *theView = _lytTop.firstItem;
+        if (theView == self.view) {
+            theView = _lytTop.secondItem;
+        }
+        NSLayoutConstraint *theLyt = [NSLayoutConstraint constraintWithItem:topLayout attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:theView attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+        [self.view removeConstraint:_lytTop];
+        [self.view addConstraint:theLyt];
+        _lytTop = theLyt;
+    }
+    if (_lytBottom) {
+        NSObject *bottomLayout = self.bottomLayoutGuide;
+        UIView *theView = _lytBottom.firstItem;
+        if (theView == self.view) {
+            theView = _lytBottom.secondItem;
+        }
+        NSLayoutConstraint *theLyt = [NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:bottomLayout attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+        [self.view removeConstraint:_lytBottom];
+        [self.view addConstraint:theLyt];
+        _lytBottom = theLyt;
+    }
 }
 
 
@@ -74,19 +97,31 @@
 
 #pragma mark - Overwrite
 
-- (void)viewDidLayoutSubviews
+
+#pragma mark - Layout
+
+- (void)alignTopView:(UIView *)aTopView
 {
-    [super viewDidLayoutSubviews];
     if (_lytTop) {
-        _lytTop.constant = self.topLayoutGuide.length;
+        [self.view removeConstraint:_lytTop];
     }
-    if (_lytBottom) {
-        _lytBottom.constant = self.bottomLayoutGuide.length;
-    }
-    if (__CUR_IOS_VERSION < __IPHONE_9_0) {
-        [self.view layoutIfNeeded];
-    }
+    NSObject *topLayout = self.topLayoutGuide;
+    NSLayoutConstraint *theLyt = [NSLayoutConstraint constraintWithItem:topLayout attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:aTopView attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+    [self.view addConstraint:theLyt];
+    _lytTop = theLyt;
 }
+
+- (void)alignBottomView:(UIView *)aBottomView
+{
+    if (_lytBottom) {
+        [self.view removeConstraint:_lytBottom];
+    }
+    NSObject *bottomLayout = self.bottomLayoutGuide;
+    NSLayoutConstraint *theLyt = [NSLayoutConstraint constraintWithItem:aBottomView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:bottomLayout attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+    [self.view addConstraint:theLyt];
+    _lytBottom = theLyt;
+}
+
 
 
 #pragma mark - Theme
