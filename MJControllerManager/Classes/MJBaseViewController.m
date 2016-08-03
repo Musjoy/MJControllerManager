@@ -52,7 +52,9 @@
         _lytBottom = theLyt;
         needLayout = YES;
     }
-    [self.view layoutIfNeeded];
+    if (needLayout) {
+        [self.view layoutIfNeeded];
+    }
 }
 
 
@@ -106,24 +108,23 @@
 
 - (void)alignTopView:(UIView *)aTopView
 {
-    if (_lytTop) {
-        [self.view removeConstraint:_lytTop];
-    }
     NSObject *topLayout = self.topLayoutGuide;
     NSLayoutConstraint *theLyt = [NSLayoutConstraint constraintWithItem:topLayout attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:aTopView attribute:NSLayoutAttributeTop multiplier:1 constant:0];
     [self.view addConstraint:theLyt];
-    _lytTop = theLyt;
+    if (_lytTop == nil) {
+        _lytTop = theLyt;
+    }
 }
 
 - (void)alignBottomView:(UIView *)aBottomView
 {
-    if (_lytBottom) {
-        [self.view removeConstraint:_lytBottom];
-    }
     NSObject *bottomLayout = self.bottomLayoutGuide;
     NSLayoutConstraint *theLyt = [NSLayoutConstraint constraintWithItem:aBottomView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:bottomLayout attribute:NSLayoutAttributeTop multiplier:1 constant:0];
     [self.view addConstraint:theLyt];
-    _lytBottom = theLyt;
+    if (_lytBottom == nil) {
+        _lytBottom = theLyt;
+    }
+
 }
 
 
