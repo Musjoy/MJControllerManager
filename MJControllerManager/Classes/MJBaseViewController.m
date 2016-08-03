@@ -27,6 +27,7 @@
 #endif
     
     // 配置lytTop和lytBottom
+    BOOL needLayout = NO;
     if (_lytTop) {
         NSObject *topLayout = self.topLayoutGuide;
         UIView *theView = _lytTop.firstItem;
@@ -37,6 +38,7 @@
         [self.view removeConstraint:_lytTop];
         [self.view addConstraint:theLyt];
         _lytTop = theLyt;
+        needLayout = YES;
     }
     if (_lytBottom) {
         NSObject *bottomLayout = self.bottomLayoutGuide;
@@ -48,7 +50,9 @@
         [self.view removeConstraint:_lytBottom];
         [self.view addConstraint:theLyt];
         _lytBottom = theLyt;
+        needLayout = YES;
     }
+    [self.view layoutIfNeeded];
 }
 
 
