@@ -24,6 +24,7 @@
 
 - (void)showBackButtonWith:(UIViewController *)viewController;
 - (void)showBackButtonWith:(UIViewController *)viewController andAction:(SEL)action;
+- (UIBarButtonItem *)showLeftButtonWith:(UIViewController *)viewController title:(NSString*)title action:(SEL)action;
 - (UIBarButtonItem *)showLeftButtonWith:(UIViewController *)viewController image:(UIImage *)image action:(SEL)action;
 
 - (UIBarButtonItem *)showRightButtonWith:(UIViewController *)viewController title:(NSString*)title action:(SEL)action ;

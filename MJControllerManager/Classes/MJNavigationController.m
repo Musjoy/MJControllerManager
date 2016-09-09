@@ -185,43 +185,33 @@
     [viewController.navigationItem setLeftBarButtonItem:leftItem animated:YES];
 }
 
+- (UIBarButtonItem *)showLeftButtonWith:(UIViewController *)viewController title:(NSString*)title action:(SEL)action
+{
+    UIBarButtonItem* leftItem = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:viewController action:action];
+    [viewController.navigationItem setLeftBarButtonItem:leftItem];
+    return leftItem;
+}
+
 - (UIBarButtonItem *)showLeftButtonWith:(UIViewController *)viewController image:(UIImage *)image action:(SEL)action
 {
-    UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn addTarget:viewController action:action forControlEvents:UIControlEventTouchUpInside];
-    btn.frame = CGRectMake(0, 5, 30, 35);
-    [btn setImage:image forState:UIControlStateNormal];
-    UIBarButtonItem* leftItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    UIBarButtonItem* leftItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:viewController action:action];
     [viewController.navigationItem setLeftBarButtonItem:leftItem];
     return leftItem;
 }
 
 - (UIBarButtonItem *)showRightButtonWith:(UIViewController *)viewController title:(NSString*)title action:(SEL)action
 {
-    UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn addTarget:viewController action:action forControlEvents:UIControlEventTouchUpInside];
-    btn.frame = CGRectMake(250, 5, 56, 30);
-    [btn setTitle:title forState:UIControlStateNormal];
-    [btn.titleLabel setFont:[UIFont systemFontOfSize:18]];
-    UIBarButtonItem* rightItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    UIBarButtonItem* rightItem = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:viewController action:action];
     [viewController.navigationItem setRightBarButtonItem:rightItem];
     return rightItem;
 }
 
 - (UIBarButtonItem *)showRightButtonWith:(UIViewController *)viewController image:(UIImage *)image action:(SEL)action
 {
-    
-    UIButton* btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [btn addTarget:viewController action:action forControlEvents:UIControlEventTouchUpInside];
-    btn.frame = CGRectMake(270, 5, 30, 35);
-    [btn setImage:image forState:UIControlStateNormal];
-    UIBarButtonItem* rightItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    UIBarButtonItem* rightItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:viewController action:action];
     [viewController.navigationItem setRightBarButtonItem:rightItem];
     return rightItem;
 }
-
-
-
 
 - (UIBarButtonItem *)createButtonWith:(id)target action:(SEL)action
 {
