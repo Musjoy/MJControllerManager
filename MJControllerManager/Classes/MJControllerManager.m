@@ -51,8 +51,8 @@ static MBProgressHUD *s_loadingProgress = nil;
     self = [super init];
     if (self) {
         _dicVCs = [[NSMutableDictionary alloc] init];
-        /// 获取keywindow
-        
+        /// 屏幕旋转
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification  object:[UIDevice currentDevice]];
     }
     return self;
 }
@@ -82,7 +82,7 @@ static MBProgressHUD *s_loadingProgress = nil;
 
 + (UIViewController *)getRootViewController
 {
-    UINavigationController *tabBarVC = (UINavigationController *)self.keyWindow.rootViewController;
+    UIViewController *tabBarVC = (UINavigationController *)self.mainWindow.rootViewController;
     return tabBarVC;
 }
 
@@ -459,13 +459,11 @@ static MBProgressHUD *s_loadingProgress = nil;
         s_windowLoading = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         [s_windowLoading setBackgroundColor:[UIColor clearColor]];
         s_windowLoading.windowLevel = UIWindowLevelAlert - 100;
-        THEBaseViewController *aBaseVC = [[THEBaseViewController alloc] init];
-        aBaseVC.view.hidden = YES;
-        [s_windowLoading setRootViewController:aBaseVC];
         [s_windowLoading makeKeyAndVisible];
 #ifdef MODULE_LOADING_VIEW
         [s_windowLoading addSubview:[self loadingView]];
 #endif
+        [THEControllerManager shareInstance];
     }
     return s_windowLoading;
 }
@@ -499,7 +497,6 @@ static MBProgressHUD *s_loadingProgress = nil;
         s_loadingProgress = [[MBProgressHUD alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         s_loadingProgress.delegate = (NavigationViewController *)[ControllerManager topNavViewController];
         s_loadingProgress.completionBlock = ^(){
-            
             [ControllerManager hideLoadingWindow];
         };
         [[self loadingWindow] addSubview:s_loadingProgress];
@@ -507,6 +504,31 @@ static MBProgressHUD *s_loadingProgress = nil;
     return s_loadingProgress;
 }
 #endif
+
+
+#pragma mark - Rotation
+
+- (void)orientationChanged:(NSNotification *)note
+{
+    if (s_windowLoading) {
+        [s_windowLoading setFrame:[self screenBounds]];
+    }
+}
+
+- (CGRect)screenBounds
+{
+    CGRect bounds = [UIScreen mainScreen].bounds;
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
+    BOOL isDevicePortrait = UIDeviceOrientationIsPortrait(deviceOrientation);
+    BOOL isInterfacePortrait = UIInterfaceOrientationIsPortrait(interfaceOrientation);
+    if (isDevicePortrait != isInterfacePortrait) {
+        CGFloat width = bounds.size.width;
+        bounds.size.width = bounds.size.height;
+        bounds.size.height = width;
+    }
+    return bounds;
+}
 
 
 @end

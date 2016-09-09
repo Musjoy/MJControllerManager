@@ -221,6 +221,67 @@
 #endif
 }
 
+#pragma mark - Loading
+
+#ifdef MODULE_LOADING_VIEW
+
+- (MJLoadingView *)loadingView
+{
+    if (self.viewInnerLoading == nil) {
+        self.viewInnerLoading = [[MJLoadingView alloc] initWithFrame:self.view.bounds];
+        self.viewInnerLoading.hidden = YES;
+        [self.viewInnerLoading setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+        [self.view addSubview:self.viewInnerLoading];
+    }
+    return self.viewInnerLoading;
+}
+
+- (NSInteger)startInnerLoading:(NSString *)loadingText
+{
+    if(loadingText.length == 0) {
+        loadingText = @"Loading...";
+    }
+    MJLoadingView *viewLoading = [self loadingView];
+    [self.view bringSubviewToFront:viewLoading];
+    return [viewLoading startLoading:loadingText];
+}
+
+- (void)startInnerLoading:(NSString *)loadingText withBlock:(NSString *(^)(NSInteger))block
+{
+    if(loadingText.length == 0) {
+        loadingText = @"Loading...";
+    }
+    MJLoadingView *viewLoading = [self loadingView];
+    [self.view bringSubviewToFront:viewLoading];
+    
+    NSInteger aIndex = [viewLoading startLoading:loadingText];
+    
+    NSString *requestId = block(aIndex);
+    if (requestId.length > 0) {
+        [viewLoading setLoadingRequestId:requestId needCancel:NO atIndex:aIndex];
+    }
+}
+
+- (void)setInnerLoadingRequestId:(NSString *)requestId atIndex:(NSInteger)aIndex
+{
+    MJLoadingView *viewLoading = [self loadingView];
+    [viewLoading setLoadingRequestId:requestId needCancel:NO atIndex:aIndex];
+}
+
+- (void)stopInnerLoading
+{
+    MJLoadingView *viewLoading = [self loadingView];
+    [viewLoading stopLoading];
+}
+
+- (void)stopInnerLoadingAtIndex:(NSInteger)aIndex
+{
+    MJLoadingView *viewLoading = [self loadingView];
+    [viewLoading stopLoadingAtIndex:aIndex];
+}
+
+#endif
+
 #pragma mark - Keyboard
 
 - (void)keyboardWillChangeFrame:(NSNotification *)notification
