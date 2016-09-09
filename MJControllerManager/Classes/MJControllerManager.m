@@ -145,7 +145,7 @@ static MBProgressHUD *s_loadingProgress = nil;
 
 + (void)popToRootViewControllerAnimated:(BOOL)animated
 {
-    UINavigationController *navVC = (UINavigationController *)self.keyWindow.rootViewController;
+    UINavigationController *navVC = (UINavigationController *)self.mainWindow.rootViewController;
     if (navVC.presentedViewController != nil) {
         [navVC dismissViewControllerAnimated:animated completion:nil];
     }
