@@ -121,8 +121,9 @@ static MBProgressHUD *s_loadingProgress = nil;
     UINavigationController *topVC = nil;
     topVC = (UINavigationController *)self.keyWindow.rootViewController;
     UIViewController *presentVC = topVC.presentedViewController;
-    if (presentVC && [presentVC isKindOfClass:[UINavigationController class]]) {
-        topVC = (UINavigationController *)presentVC;
+    while (presentVC) {
+        topVC = presentVC;
+        presentVC = topVC.presentedViewController;
     }
     return topVC;
 }
