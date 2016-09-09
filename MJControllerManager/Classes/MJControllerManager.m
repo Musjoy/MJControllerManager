@@ -460,9 +460,6 @@ static MBProgressHUD *s_loadingProgress = nil;
         [s_windowLoading setBackgroundColor:[UIColor clearColor]];
         s_windowLoading.windowLevel = UIWindowLevelAlert - 100;
         [s_windowLoading makeKeyAndVisible];
-#ifdef MODULE_LOADING_VIEW
-        [s_windowLoading addSubview:[self loadingView]];
-#endif
         [THEControllerManager shareInstance];
     }
     return s_windowLoading;
@@ -480,7 +477,8 @@ static MBProgressHUD *s_loadingProgress = nil;
 + (MJLoadingView *)loadingView
 {
     if (s_loadingView == nil) {
-        s_loadingView = [[MJLoadingView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        s_loadingView = [[MJLoadingView alloc] initWithFrame:[[self loadingWindow] bounds]];
+        [[self loadingWindow] addSubview:s_loadingView];
         s_loadingView.btnBack.enabled = YES;
         [s_loadingView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         s_loadingView.completionBlock = ^(){
