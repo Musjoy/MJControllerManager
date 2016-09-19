@@ -479,13 +479,15 @@ static MBProgressHUD *s_loadingProgress = nil;
 {
     if (s_loadingView == nil) {
         s_loadingView = [[MJLoadingView alloc] initWithFrame:[[self loadingWindow] bounds]];
-        [[self loadingWindow] addSubview:s_loadingView];
         s_loadingView.btnBack.enabled = YES;
         [s_loadingView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         s_loadingView.completionBlock = ^(){
             [s_loadingView removeFromSuperview];
             [MJControllerManager hideLoadingWindow];
         };
+    }
+    if (s_loadingView.superview == nil) {
+        [[self loadingWindow] addSubview:s_loadingView];
     }
     return s_loadingView;
 }
