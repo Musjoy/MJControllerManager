@@ -8,11 +8,13 @@
 
 #import "MJControllerManager.h"
 #import HEADER_BASE_VIEW_CONTROLLER
+#import HEADER_WINDOW_ROOT_VIEW_CONTROLLER
 #ifdef MODULE_TOAST
 #import "MJToast.h"
 #endif
 
 static MJControllerManager *s_controllerManager = nil;
+static MJControllerManager *s_topWindow = nil;
 
 // loading所依附的window
 static UIWindow *s_windowLoading = nil;
@@ -52,30 +54,23 @@ static MBProgressHUD *s_loadingProgress = nil;
     if (self) {
         _dicVCs = [[NSMutableDictionary alloc] init];
         /// 屏幕旋转
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification  object:[UIDevice currentDevice]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeKeyWindow:) name:UIWindowDidBecomeKeyNotification object:nil];
     }
     return self;
-}
-
-+ (UIWindow *)keyWindow
-{
-    id<UIApplicationDelegate> delegate = [UIApplication sharedApplication].delegate;
-    UIWindow *topWindow = [delegate window];
-    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
-    if (keyWindow != topWindow) {
-        if (keyWindow.rootViewController
-            && !keyWindow.rootViewController.view.isHidden
-            && keyWindow.windowLevel <= UIWindowLevelNormal + 10) {
-            topWindow = keyWindow;
-        }
-    }
-    return topWindow;
 }
 
 + (UIWindow *)mainWindow
 {
     id<UIApplicationDelegate> delegate = [UIApplication sharedApplication].delegate;
     return [delegate window];
+}
+
++ (UIWindow *)topWindow
+{
+    if (s_topWindow == nil) {
+        [[THEControllerManager shareInstance] changeKeyWindow:nil];
+    }
+    return s_topWindow;
 }
 
 #pragma mark - ViewCotroller
@@ -89,7 +84,7 @@ static MBProgressHUD *s_loadingProgress = nil;
 + (UIViewController *)topViewController
 {
     UIViewController *topVC = nil;
-    UINavigationController *navVC = (UINavigationController *)self.keyWindow.rootViewController;
+    UINavigationController *navVC = (UINavigationController *)self.topWindow.rootViewController;
     while (navVC.presentedViewController != nil) {
         navVC = (UINavigationController *)navVC.presentedViewController;
     }
@@ -119,7 +114,7 @@ static MBProgressHUD *s_loadingProgress = nil;
 + (UINavigationController *)topNavViewController
 {
     UINavigationController *topVC = nil;
-    topVC = (UINavigationController *)self.keyWindow.rootViewController;
+    topVC = (UINavigationController *)self.topWindow.rootViewController;
     UIViewController *presentVC = topVC.presentedViewController;
     while (presentVC) {
         topVC = presentVC;
@@ -461,6 +456,7 @@ static MBProgressHUD *s_loadingProgress = nil;
         [s_windowLoading setBackgroundColor:[UIColor clearColor]];
         s_windowLoading.windowLevel = UIWindowLevelAlert - 100;
         [s_windowLoading makeKeyAndVisible];
+        [s_windowLoading setRootViewController:[[THEWindowRootViewController alloc] init]];
         [THEControllerManager shareInstance];
     }
     return s_windowLoading;
@@ -507,29 +503,29 @@ static MBProgressHUD *s_loadingProgress = nil;
 #endif
 
 
-#pragma mark - Rotation
+#pragma mark - Notification Receive
 
-- (void)orientationChanged:(NSNotification *)note
+- (void)changeKeyWindow:(NSNotification *)note
 {
-    if (s_windowLoading) {
-        [s_windowLoading setFrame:[self screenBounds]];
+    id<UIApplicationDelegate> delegate = [UIApplication sharedApplication].delegate;
+    UIWindow *mainWindow = [delegate window];
+    UIWindow *topWindow = [[UIApplication sharedApplication] keyWindow];
+    if (topWindow != mainWindow) {
+        NSArray *arrWindows = [[UIApplication sharedApplication].windows sortedArrayUsingComparator:^NSComparisonResult(UIWindow *win1, UIWindow *win2) {
+            return win1.windowLevel - win2.windowLevel;
+        }];
+        for (NSInteger i = arrWindows.count - 1; i >=0 ; i--) {
+            UIWindow *aWindow = arrWindows[i];
+            if (![aWindow isKindOfClass:NSClassFromString(@"UITextEffectsWindow")]
+                && aWindow.windowLevel <= UIWindowLevelNormal + 10
+                && aWindow.rootViewController
+                && !aWindow.rootViewController.view.isHidden) {
+                topWindow = aWindow;
+                break;
+            }
+        }
     }
+    s_topWindow = topWindow;
 }
-
-- (CGRect)screenBounds
-{
-    CGRect bounds = [UIScreen mainScreen].bounds;
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
-    BOOL isDevicePortrait = UIDeviceOrientationIsPortrait(deviceOrientation);
-    BOOL isInterfacePortrait = UIInterfaceOrientationIsPortrait(interfaceOrientation);
-    if (isDevicePortrait != isInterfacePortrait) {
-        CGFloat width = bounds.size.width;
-        bounds.size.width = bounds.size.height;
-        bounds.size.height = width;
-    }
-    return bounds;
-}
-
 
 @end

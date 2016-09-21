@@ -336,6 +336,11 @@
     return UIInterfaceOrientationMaskAll;
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
 #ifdef MODULE_THEME_MANAGER
@@ -344,6 +349,7 @@
     return UIStatusBarStyleDefault;
 #endif
 }
+
 
 #pragma mark - 
 
