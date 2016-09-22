@@ -483,6 +483,8 @@ static MBProgressHUD *s_loadingProgress = nil;
         };
     }
     if (s_loadingView.superview == nil) {
+        [s_loadingView setFrame:[[self loadingWindow] bounds]];
+        [s_loadingView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [[self loadingWindow] addSubview:s_loadingView];
     }
     return s_loadingView;

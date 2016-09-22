@@ -39,12 +39,12 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return [[THEControllerManager topViewController] preferredStatusBarStyle];
+    return [[UIApplication sharedApplication] statusBarStyle];
 }
 
 - (BOOL)prefersStatusBarHidden
 {
-    return [[THEControllerManager topViewController] prefersStatusBarHidden];
+    return [[UIApplication sharedApplication] isStatusBarHidden];
 }
 
 /*
