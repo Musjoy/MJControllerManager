@@ -7,8 +7,8 @@
 //
 
 #import "MJBaseViewController.h"
-#ifdef HEADER_UM_ANALYSE
-#import HEADER_UM_ANALYSE
+#ifdef HEADER_ANALYSE
+#import HEADER_ANALYSE
 #endif
 
 @interface MJBaseViewController ()

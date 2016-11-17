@@ -36,8 +36,8 @@
 
 #pragma mark - Layout
 
-@property (weak, nonatomic, readonly) IBOutlet NSLayoutConstraint *lytTop;        /**< 顶部适配Layout */
-@property (weak, nonatomic, readonly) IBOutlet NSLayoutConstraint *lytBottom;     /**< 底部适配Layout */
+@property (weak, nonatomic, readonly) IBOutlet NSLayoutConstraint *lytTop;        ///< 顶部适配Layout
+@property (weak, nonatomic, readonly) IBOutlet NSLayoutConstraint *lytBottom;     ///< 底部适配Layout
 
 /// 将该aTopView与topLayoutGuide相连，调用该函数前必须确保aTopView在self.view内
 - (void)alignTopView:(UIView *)aTopView;

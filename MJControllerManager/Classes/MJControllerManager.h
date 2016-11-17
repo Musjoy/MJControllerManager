@@ -16,13 +16,13 @@
 #endif
 
 // 统计定义
-#ifdef HEADER_UM_ANALYSE
-#import HEADER_UM_ANALYSE
-#ifndef stat_Share
-#define stat_Share              @"Share"
+#ifdef HEADER_ANALYSE
+#import HEADER_ANALYSE
+#ifndef STAT_Share
+#define STAT_Share              @"Share"
 #endif
-#ifndef stat_SharePlatform
-#define stat_SharePlatform      @"SharePlatform"
+#ifndef STAT_SharePlatform
+#define STAT_SharePlatform      @"SharePlatform"
 #endif
 #endif
 

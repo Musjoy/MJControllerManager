@@ -292,8 +292,8 @@ static MBProgressHUD *s_loadingProgress = nil;
         }
         [activityVC setCompletionWithItemsHandler: ^(NSString * __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError) {
             if (completed) {
-                triggerEvent(stat_Share, @{@"name":@"分享成功"});
-                triggerEvent(stat_SharePlatform, @{@"name":activityType});
+                triggerEventStr(STAT_Share, @"分享成功");
+                triggerEventStr(STAT_SharePlatform, activityType);
             }
             if (completion) {
                 completion(completed, @"", activityType);
@@ -303,8 +303,8 @@ static MBProgressHUD *s_loadingProgress = nil;
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
         [activityVC setCompletionHandler:^(NSString * __nullable activityType, BOOL completed) {
             if (completed) {
-                triggerEvent(stat_Share, @{@"name":@"分享成功"});
-                triggerEvent(stat_SharePlatform, @{@"name":activityType});
+                triggerEventStr(STAT_Share, @"分享成功");
+                triggerEventStr(STAT_SharePlatform, activityType);
             }
             if (completion) {
                 completion(completed, @"", activityType);
