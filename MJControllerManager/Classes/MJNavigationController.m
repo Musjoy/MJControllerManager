@@ -312,10 +312,11 @@
     return [[self topViewController] supportedInterfaceOrientations];
 }
 
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-    return [[self topViewController] preferredInterfaceOrientationForPresentation];
-}
+// 这个只在present和dismiss时回调用，最好不重写。容易引起奔溃
+//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+//{
+//    return [[self topViewController] preferredInterfaceOrientationForPresentation];
+//}
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
