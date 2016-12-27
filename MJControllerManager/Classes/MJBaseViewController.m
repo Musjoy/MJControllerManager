@@ -53,7 +53,7 @@
         needLayout = YES;
     }
     if (needLayout) {
-        [self.view layoutIfNeeded];
+        [self.view setNeedsLayout];
     }
 }
 
