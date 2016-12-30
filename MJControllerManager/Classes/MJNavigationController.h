@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-#ifndef kNavActiveColor
-#define kNavActiveColor [UIColor colorWithRed:0 green:122.0/255.0 blue:1 alpha:1]
+#ifndef kNavTintColor
+#define kNavTintColor [UIColor colorWithRed:0 green:122.0/255.0 blue:1 alpha:1]
 #endif
 
 @interface MJNavigationController : UINavigationController<UIGestureRecognizerDelegate>

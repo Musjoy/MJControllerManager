@@ -145,14 +145,14 @@
     [self.navigationBar setBarTintColor:kNavBgColor];
 #endif
     [self.view setBackgroundColor:[UIColor whiteColor]];
-#ifdef kNavActiveColor
-    UIColor *navTintColor = kNavActiveColor;
-#elif kAppActiveColor
-    UIColor *navTintColor = kAppActiveColor;
+#ifdef kNavTintColor
+    UIColor *navTintColor = kNavTintColor;
+#elif kAppTintColor
+    UIColor *navTintColor = kAppTintColor;
 #else
     UIColor *navTintColor = [UIColor blackColor];
 #endif
-    [self.navigationBar setTintColor:kNavActiveColor];
+    [self.navigationBar setTintColor:kNavTintColor];
 #ifdef kNavTitleColor
     UIColor *titleColor = kNavTitleColor;
 #else
@@ -163,7 +163,7 @@
     shadow.shadowOffset = CGSizeMake(0, 0);
     NSDictionary *textAttr = [NSDictionary dictionaryWithObjectsAndKeys:
                               titleColor, NSForegroundColorAttributeName,
-                              //                              kAppActiveColor, NSForegroundColorAttributeName,
+                              //                              kAppTintColor, NSForegroundColorAttributeName,
                               //                              [UIFont fontWithName:@"JXiHei" size:17], TextAttributeFont,
                               //                              [UIFont boldSystemFontOfSize:17], TextAttributeFont,
                               shadow, NSShadowAttributeName,nil];

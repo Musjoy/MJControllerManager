@@ -17,6 +17,7 @@
 
 @implementation MJBaseViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -138,7 +139,11 @@
     if (bgColor) {
         self.view.backgroundColor = bgColor;
     }
-    UIColor *mainColor = [MJThemeManager colorFor:kThemeMainColor];
+    NSString *colorKey = kThemeTintColor;
+    if (_themeIdentifier > 0) {
+        colorKey = [kThemeTintColor stringByAppendingFormat:@"-%@", _themeIdentifier];
+    }
+    UIColor *mainColor = [MJThemeManager colorFor:colorKey];
     if (mainColor) {
         [self.view setTintColor:mainColor];
     }
@@ -156,8 +161,8 @@
     }
 #else
     self.view.backgroundColor = [UIColor whiteColor];
-#ifdef kAppActiveColor
-    [self.view setTintColor:kAppActiveColor];
+#ifdef kAppTintColor
+    [self.view setTintColor:kAppTintColor];
 #endif
 #endif
 }
