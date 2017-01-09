@@ -66,8 +66,9 @@
     if (!_isViewHadShow) {
         // 解决部分界面第一次显示ScrollView显示异常问题
         if (__CUR_IOS_VERSION < __IPHONE_9_0) {
-            [self.navigationController setNavigationBarHidden:YES animated:NO];
-            [self.navigationController setNavigationBarHidden:NO animated:NO];
+            BOOL isHide = self.navigationController.navigationBarHidden;
+            [self.navigationController setNavigationBarHidden:!isHide animated:NO];
+            [self.navigationController setNavigationBarHidden:isHide animated:NO];
         }
     }
 }
