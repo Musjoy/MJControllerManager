@@ -277,10 +277,16 @@ static MBProgressHUD *s_loadingProgress = nil;
 
 + (void)showShareViewWith:(NSArray *)shareContents onView:(UIView *)aView completion:(ActionCompleteBlock)completion
 {
+    [self showShareViewWith:shareContents onView:aView excludedList:nil completion:completion];
+}
+
++ (void)showShareViewWith:(NSArray *)shareContents onView:(UIView *)aView excludedList:(NSArray<UIActivityType> *)excludedList completion:(ActionCompleteBlock)completion
+{
     UIActivityViewController *activityVC =
     [[UIActivityViewController alloc] initWithActivityItems:shareContents
                                       applicationActivities:nil];
     
+    activityVC.excludedActivityTypes = excludedList;
     if (__CUR_IOS_VERSION >= __IPHONE_8_0) {
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
             if (aView) {

@@ -67,6 +67,8 @@
 
 + (void)showShareViewWith:(NSArray *)shareContents onView:(UIView *)aView completion:(ActionCompleteBlock)completion;
 
++ (void)showShareViewWith:(NSArray *)shareContents onView:(UIView *)aView excludedList:(NSArray<UIActivityType> *)excludedList completion:(ActionCompleteBlock)completion;
+
 //+ (void)hideShareView;
 
 
