@@ -32,7 +32,7 @@
 
 #pragma mark - ViewCotroller
 
-+ (instancetype)shareInstance;
++ (instancetype)sharedInstance;
 
 + (UIWindow *)mainWindow;
 

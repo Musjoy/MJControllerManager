@@ -40,7 +40,7 @@ static MBProgressHUD *s_loadingProgress = nil;
 
 @implementation MJControllerManager
 
-+ (instancetype)shareInstance
++ (instancetype)sharedInstance
 {
     if (s_controllerManager == nil) {
         s_controllerManager = [[self.class alloc] init];
@@ -68,7 +68,7 @@ static MBProgressHUD *s_loadingProgress = nil;
 + (UIWindow *)topWindow
 {
     if (s_topWindow == nil) {
-        [[THEControllerManager shareInstance] changeKeyWindow:nil];
+        [[THEControllerManager sharedInstance] changeKeyWindow:nil];
     }
     return s_topWindow;
 }
@@ -201,7 +201,7 @@ static MBProgressHUD *s_loadingProgress = nil;
 
 + (__kindof UIViewController *)getUniqueViewControllerWithName:(NSString *)aVCName
 {
-    NSMutableDictionary *dicVCs = [[self shareInstance] dicVCs];
+    NSMutableDictionary *dicVCs = [[self sharedInstance] dicVCs];
     UIViewController *aVC = [dicVCs objectForKey:aVCName];
     if (aVC) {
         return aVC;
@@ -237,7 +237,7 @@ static MBProgressHUD *s_loadingProgress = nil;
 
 + (DataListHandleModel *)getListHandleModelWith:(NSString *)aListVCName
 {
-    return [[self shareInstant] getListHandleModelWith:aListVCName];
+    return [[self sharedInstance] getListHandleModelWith:aListVCName];
 }
 
 #pragma mark -Subjoin
@@ -463,7 +463,7 @@ static MBProgressHUD *s_loadingProgress = nil;
         s_windowLoading.windowLevel = UIWindowLevelAlert - 100;
         [s_windowLoading makeKeyAndVisible];
         [s_windowLoading setRootViewController:[[THEWindowRootViewController alloc] init]];
-        [THEControllerManager shareInstance];
+        [THEControllerManager sharedInstance];
     }
     return s_windowLoading;
 }
