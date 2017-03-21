@@ -176,13 +176,17 @@
 - (void)showBackButtonWith:(UIViewController *)viewController
 {
     UIBarButtonItem *leftItem = [self createButtonWith:self action:@selector(back)];
-    [viewController.navigationItem setLeftBarButtonItem:leftItem animated:YES];
+    if (leftItem) {
+        [viewController.navigationItem setLeftBarButtonItem:leftItem animated:YES];
+    }
 }
 
 - (void)showBackButtonWith:(UIViewController *)viewController andAction:(SEL)action
 {
     UIBarButtonItem *leftItem = [self createButtonWith:viewController action:action];
-    [viewController.navigationItem setLeftBarButtonItem:leftItem animated:YES];
+    if (leftItem) {
+        [viewController.navigationItem setLeftBarButtonItem:leftItem animated:YES];
+    }
 }
 
 - (UIBarButtonItem *)showLeftButtonWith:(UIViewController *)viewController title:(NSString*)title action:(SEL)action
@@ -216,6 +220,10 @@
 - (UIBarButtonItem *)createButtonWith:(id)target action:(SEL)action
 {
     // 设置返回键
+    UIImage *imgBack = [UIImage imageNamed:@"nav_back"];
+    if (imgBack == nil) {
+        return nil;
+    }
     UIBarButtonItem *backNav = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_back"] style:UIBarButtonItemStylePlain target:target action:action];
     return backNav;
 }
