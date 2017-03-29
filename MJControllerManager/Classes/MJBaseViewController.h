@@ -36,8 +36,8 @@
 
 #pragma mark - Layout
 
-@property (weak, nonatomic, readonly) IBOutlet NSLayoutConstraint *lytTop;          ///< 顶部适配Layout
-@property (weak, nonatomic, readonly) IBOutlet NSLayoutConstraint *lytBottom;       ///< 底部适配Layout
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lytTop;                    ///< 顶部适配Layout
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lytBottom;                 ///< 底部适配Layout
 
 #ifdef MODULE_THEME_MANAGER
 @property (nonatomic, strong) IBInspectable NSString *themeIdentifier;              ///< 主题标示

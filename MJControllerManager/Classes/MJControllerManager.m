@@ -14,7 +14,7 @@
 #endif
 
 static MJControllerManager *s_controllerManager = nil;
-static MJControllerManager *s_topWindow = nil;
+static UIWindow *s_topWindow = nil;
 
 // loading所依附的window
 static UIWindow *s_windowLoading = nil;
@@ -117,7 +117,7 @@ static MBProgressHUD *s_loadingProgress = nil;
     topVC = (UINavigationController *)self.topWindow.rootViewController;
     UIViewController *presentVC = topVC.presentedViewController;
     while (presentVC) {
-        topVC = presentVC;
+        topVC = (UINavigationController *)presentVC;
         presentVC = topVC.presentedViewController;
     }
     return topVC;
