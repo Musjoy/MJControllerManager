@@ -75,8 +75,6 @@
  *
  *	@param 	loadingText 	在loading中显示的文案
  *	@param 	block           配置网络请求的block
- *
- *	@return
  */
 - (void)startInnerLoading:(NSString *)loadingText withBlock:(NSString *(^)(NSInteger aIndex))block;
 
@@ -85,8 +83,6 @@
  *
  *	@param 	requestId 	网络请求Id
  *	@param 	aIndex      loading对应Index
- *
- *	@return
  */
 - (void)setInnerLoadingRequestId:(NSString *)requestId atIndex:(NSInteger)aIndex;
 

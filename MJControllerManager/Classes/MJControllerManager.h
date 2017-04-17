@@ -77,10 +77,15 @@
 /**
  *	@brief	提示
  *
- *	@param 	title       提示标题
  *	@param 	massage     提示信息
  */
 + (void)alertMsg:(NSString*)massage;
+/**
+ *	@brief	提示
+ *
+ *	@param 	title       提示标题
+ *	@param 	massage     提示信息
+ */
 + (void)alert:(NSString *)title message:(NSString *)massage;
 
 /**
@@ -111,8 +116,6 @@
  *	@param 	requestId 	网络请求Id
  *	@param 	needCancel  是否显示取消按钮
  *	@param 	aIndex      loading对应Index
- *
- *	@return
  */
 + (void)setLoadingRequestId:(NSString *)requestId needCancel:(BOOL)needCancel atIndex:(NSInteger)aIndex;
 #endif
