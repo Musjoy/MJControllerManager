@@ -386,6 +386,7 @@ static MBProgressHUD *s_loadingProgress = nil;
     MJLoadingView *viewLoading = [self loadingView];
     
     [viewLoading stopAllLoading];
+    
 }
 
 + (void)stopLoadingAtIndex:(NSInteger)aIndex
@@ -421,7 +422,7 @@ static MBProgressHUD *s_loadingProgress = nil;
     theProgress.labelText = labelText;
     theProgress.detailsLabelText = detailText;
     theProgress.completionBlock = ^(){
-        [ControllerManager hideLoadingWindow];
+        [self hideLoadingWindow];
     };
     [[self loadingWindow] addSubview:theProgress];
     [theProgress show:YES];
@@ -485,7 +486,7 @@ static MBProgressHUD *s_loadingProgress = nil;
         [s_loadingView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         s_loadingView.completionBlock = ^(){
             [s_loadingView removeFromSuperview];
-            [MJControllerManager hideLoadingWindow];
+            [self hideLoadingWindow];
         };
     }
     if (s_loadingView.superview == nil) {
@@ -500,9 +501,9 @@ static MBProgressHUD *s_loadingProgress = nil;
 {
     if (s_loadingProgress == nil) {
         s_loadingProgress = [[MBProgressHUD alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        s_loadingProgress.delegate = (NavigationViewController *)[ControllerManager topNavViewController];
+        s_loadingProgress.delegate = (NavigationViewController *)[self topNavViewController];
         s_loadingProgress.completionBlock = ^(){
-            [ControllerManager hideLoadingWindow];
+            [self hideLoadingWindow];
         };
         [[self loadingWindow] addSubview:s_loadingProgress];
     }
