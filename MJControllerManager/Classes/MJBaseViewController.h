@@ -25,6 +25,10 @@
 #define sLoading            @"Loading..."
 #endif
 
+// 配置Controller里面loading的样式
+#ifndef LOADING_IN_CONTROLLER_TYPE
+#define LOADING_IN_CONTROLLER_TYPE 0
+#endif
 
 @interface MJBaseViewController : UIViewController
 

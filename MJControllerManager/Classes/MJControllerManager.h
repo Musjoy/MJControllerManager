@@ -15,6 +15,11 @@
 #import "MBProgressHUD.h"
 #endif
 
+// 配置通用loading的样式
+#ifndef LOADING_COMMON_TYPE
+#define LOADING_COMMON_TYPE 0
+#endif
+
 // 统计定义
 #ifdef HEADER_ANALYSE
 #import HEADER_ANALYSE

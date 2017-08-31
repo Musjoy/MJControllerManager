@@ -481,7 +481,7 @@ static MBProgressHUD *s_loadingProgress = nil;
 + (MJLoadingView *)loadingView
 {
     if (s_loadingView == nil) {
-        s_loadingView = [[MJLoadingView alloc] initWithFrame:[[self loadingWindow] bounds]];
+        s_loadingView = [[MJLoadingView alloc] initWithFrame:[[self loadingWindow] bounds]  andType:LOADING_COMMON_TYPE];
         s_loadingView.btnBack.enabled = YES;
         [s_loadingView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         s_loadingView.completionBlock = ^(){

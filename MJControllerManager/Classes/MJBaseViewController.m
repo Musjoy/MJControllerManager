@@ -234,7 +234,7 @@
 - (MJLoadingView *)loadingView
 {
     if (self.viewInnerLoading == nil) {
-        self.viewInnerLoading = [[MJLoadingView alloc] initWithFrame:self.view.bounds];
+        self.viewInnerLoading = [[MJLoadingView alloc] initWithFrame:self.view.bounds andType:LOADING_IN_CONTROLLER_TYPE];
         self.viewInnerLoading.hidden = YES;
         [self.viewInnerLoading setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
         [self.view addSubview:self.viewInnerLoading];
