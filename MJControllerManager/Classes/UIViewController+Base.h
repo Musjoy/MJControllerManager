@@ -24,8 +24,8 @@
  *
  *	@param 	labelText 	加载框显示内容
  */
-- (void)startLoading:(NSString *)labelText;
-- (void)startLoading:(NSString *)labelText detailText:(NSString *)detailText;
+- (NSInteger)startLoading:(NSString *)labelText;
+- (NSInteger)startLoading:(NSString *)labelText detailText:(NSString *)detailText;
 
 /**
  *	@brief	隐藏加载框

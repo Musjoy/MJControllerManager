@@ -22,14 +22,14 @@
     [THEControllerManager alert:title message:message];
 }
 
-- (void)startLoading:(NSString *)labelText
+- (NSInteger)startLoading:(NSString *)labelText
 {
-    [THEControllerManager startLoading:labelText];
+    return [THEControllerManager startLoading:labelText];
 }
 
-- (void)startLoading:(NSString *)labelText detailText:(NSString *)detailText
+- (NSInteger)startLoading:(NSString *)labelText detailText:(NSString *)detailText
 {
-    [THEControllerManager startLoading:labelText detailText:detailText];
+    return [THEControllerManager startLoading:labelText detailText:detailText];
 }
 
 - (void)stopLoading
