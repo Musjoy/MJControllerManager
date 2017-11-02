@@ -161,7 +161,9 @@
         [self reloadThemeForTableView:aTableView];
     }
 #else
-    self.view.backgroundColor = [UIColor whiteColor];
+#ifdef kAppBgColor
+    self.view.backgroundColor = kAppBgColor;
+#endif
 #ifdef kAppTintColor
     [self.view setTintColor:kAppTintColor];
 #endif
