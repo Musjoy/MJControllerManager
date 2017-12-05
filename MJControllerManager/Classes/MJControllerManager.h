@@ -43,10 +43,15 @@
 
 + (UIWindow *)topWindow;
 
-+ (UIViewController *)getRootViewController;
++ (UIViewController *)rootViewController;
 
+/// 最顶层界面
 + (UIViewController *)topViewController;
 
+/// 最顶层容器界面
++ (UIViewController *)topContainerController;
+
+/// 请使用topContainerController
 + (UINavigationController *)topNavViewController;
 
 + (BOOL)isInRootView;

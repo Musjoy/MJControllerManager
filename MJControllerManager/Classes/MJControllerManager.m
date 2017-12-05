@@ -12,6 +12,7 @@
 #ifdef MODULE_TOAST
 #import "MJToast.h"
 #endif
+#import <MJAlertManager/MJAlertManager.h>
 
 static MJControllerManager *s_controllerManager = nil;
 static UIWindow *s_topWindow = nil;
@@ -75,7 +76,7 @@ static MBProgressHUD *s_loadingProgress = nil;
 
 #pragma mark - ViewCotroller
 
-+ (UIViewController *)getRootViewController
++ (UIViewController *)rootViewController
 {
     UIViewController *tabBarVC = (UINavigationController *)self.mainWindow.rootViewController;
     return tabBarVC;
@@ -111,6 +112,18 @@ static MBProgressHUD *s_loadingProgress = nil;
     return topVC;
 }
 
++ (UIViewController *)topContainerController
+{
+    UIViewController *topVC = nil;
+    topVC = self.topWindow.rootViewController;
+    UIViewController *presentVC = topVC.presentedViewController;
+    while (presentVC) {
+        topVC = presentVC;
+        presentVC = topVC.presentedViewController;
+    }
+    return topVC;
+}
+
 + (UINavigationController *)topNavViewController
 {
     UINavigationController *topVC = nil;
@@ -123,11 +136,9 @@ static MBProgressHUD *s_loadingProgress = nil;
     return topVC;
 }
 
-
-
 + (BOOL)isInRootView
 {
-    UITabBarController *tabBarVC = (UITabBarController *)self.getRootViewController;
+    UIViewController *tabBarVC = self.rootViewController;
     if ([tabBarVC presentedViewController] == nil) {
         return YES;
     }
