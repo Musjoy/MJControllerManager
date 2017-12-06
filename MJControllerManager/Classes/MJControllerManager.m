@@ -12,7 +12,7 @@
 #ifdef MODULE_TOAST
 #import "MJToast.h"
 #endif
-#import <MJAlertManager/MJAlertManager.h>
+#import HEADER_ALERT
 
 static MJControllerManager *s_controllerManager = nil;
 static UIWindow *s_topWindow = nil;
