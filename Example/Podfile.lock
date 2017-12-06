@@ -1,9 +1,9 @@
 PODS:
   - ActionProtocol (0.1.0)
-  - MJControllerManager (0.1.1):
+  - MJControllerManager (0.1.5):
     - ActionProtocol
-    - ModuleCapability (~> 0.1.2)
-  - ModuleCapability (0.1.2)
+    - ModuleCapability (~> 0.1)
+  - ModuleCapability (0.1.7)
 
 DEPENDENCIES:
   - MJControllerManager (from `../`)
@@ -14,7 +14,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   ActionProtocol: f5279c482de3abb31ea34b54a0ecfaf8d5cca561
-  MJControllerManager: 28a7d2792439d13ae617e375725ae454aa7add2d
-  ModuleCapability: 35cea7154ff855362682e90ecf1be529a533c931
+  MJControllerManager: 704dc2fc8318533c3c164248912bc3e9412f2f3a
+  ModuleCapability: c9d20a2f6070d9315531a94d51b1551a070662b6
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 2ed3669acb299708e71e5db49f6ade443afac20b
+
+COCOAPODS: 1.3.1

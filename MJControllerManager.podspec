@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   }
 
   s.dependency 'ActionProtocol'
-  s.dependency 'ModuleCapability', '~> 0.1.2'
+  s.dependency 'ModuleCapability', '~> 0.1'
   s.prefix_header_contents = '#import "ModuleCapability.h"'
 
 end
