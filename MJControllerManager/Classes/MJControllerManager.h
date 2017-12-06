@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "ActionProtocol.h"
+#import <ActionProtocol/ActionProtocol.h>
 #ifdef MODULE_LOADING_VIEW
 #import "MJLoadingView.h"
 #elif defined(MODULE_MBProgressHUD)
