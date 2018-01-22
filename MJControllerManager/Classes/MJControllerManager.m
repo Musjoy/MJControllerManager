@@ -28,7 +28,7 @@ static MBProgressHUD *s_loadingProgress = nil;
 #endif
 
 
-@interface MJControllerManager ()<UIAlertViewDelegate>
+@interface MJControllerManager ()
 
 @property (nonatomic, strong) NSMutableDictionary *dicForListVC;
 
@@ -343,14 +343,12 @@ static MBProgressHUD *s_loadingProgress = nil;
 
 + (void)alertMsg:(NSString *)massage
 {
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:massage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
+    alertTitleMessage(nil, massage);
 }
 
 + (void)alert:(NSString *)title message:(NSString *)massage
 {
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:title message:massage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
+    alertTitleMessage(title, massage);
 }
 
 + (void)toast:(NSString *)str
