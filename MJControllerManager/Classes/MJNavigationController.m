@@ -9,11 +9,11 @@
 #import "MJNavigationController.h"
 #import "MJBaseViewController.h"
 #include <objc/message.h>
-#ifdef MODULE_UTILS
-#import "Utils.h"
+#ifdef  MODULE_UTILS
+#import <MJUtils/Utils.h>
 #endif
-#ifdef MODULE_THEME_MANAGER
-#import "MJThemeManager.h"
+#ifdef  MODULE_THEME_MANAGER
+#import <MJThemeManager/MJThemeManager.h>
 #endif
 
 #define BACK_ITEM_TAG 1000

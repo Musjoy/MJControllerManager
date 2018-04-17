@@ -9,8 +9,8 @@
 #import "MJControllerManager.h"
 #import HEADER_BASE_VIEW_CONTROLLER
 #import HEADER_WINDOW_ROOT_VIEW_CONTROLLER
-#ifdef MODULE_TOAST
-#import "MJToast.h"
+#ifdef  MODULE_TOAST
+#import <MJToast/MJToast.h>
 #endif
 #import HEADER_ALERT
 
@@ -298,7 +298,7 @@ static MBProgressHUD *s_loadingProgress = nil;
                                       applicationActivities:nil];
     
     activityVC.excludedActivityTypes = excludedList;
-    if (__CUR_IOS_VERSION >= __IPHONE_8_0) {
+    if (@available(iOS 8.0, *)) {
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
             if (aView) {
                 activityVC.popoverPresentationController.sourceView = aView;

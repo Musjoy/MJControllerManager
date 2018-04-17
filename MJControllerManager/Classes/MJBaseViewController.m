@@ -7,7 +7,7 @@
 //
 
 #import "MJBaseViewController.h"
-#ifdef HEADER_ANALYSE
+#ifdef  HEADER_ANALYSE
 #import HEADER_ANALYSE
 #endif
 
@@ -30,6 +30,12 @@
     // 配置lytTop和lytBottom
     BOOL needLayout = NO;
     if (_lytTop) {
+        if (@available(iOS 11.0, *)) {
+            UILayoutGuide *safeGuide = self.view.safeAreaLayoutGuide;
+//            self.view.safeAreaLayoutGuide
+        } else {
+            // Fallback on earlier versions
+        }
         NSObject *topLayout = self.topLayoutGuide;
         UIView *theView = _lytTop.firstItem;
         if (theView == self.view) {

@@ -8,17 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "UIViewController+Base.h"
-#ifdef HEADER_CONTROLLER_MANAGER
+#ifdef  HEADER_CONTROLLER_MANAGER
 #import HEADER_CONTROLLER_MANAGER
 #endif
-#ifdef MODULE_THEME_MANAGER
-#import "MJThemeManager.h"
+#ifdef  MODULE_THEME_MANAGER
+#import <MJThemeManager/MJThemeManager.h>
 #endif
-#ifdef MODULE_UTILS
-#import "Utils.h"
+#ifdef  MODULE_UTILS
+#import <MJUtils/Utils.h>
 #endif
-#ifdef MODULE_LOADING_VIEW
-#import "MJLoadingView.h"
+#ifdef  MODULE_LOADING_VIEW
+#import <MJLoadingView/MJLoadingView.h>
 #endif
 
 #ifndef sLoading
