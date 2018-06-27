@@ -286,12 +286,12 @@ static MBProgressHUD *s_loadingProgress = nil;
 
 #pragma mark - Share View
 
-+ (void)showShareViewWith:(NSArray *)shareContents onView:(UIView *)aView completion:(ActionCompleteBlock)completion
++ (void)showShareViewWith:(NSArray *)shareContents onView:(id)aView completion:(ActionCompleteBlock)completion
 {
     [self showShareViewWith:shareContents onView:aView excludedList:nil completion:completion];
 }
 
-+ (void)showShareViewWith:(NSArray *)shareContents onView:(UIView *)aView excludedList:(NSArray<UIActivityType> *)excludedList completion:(ActionCompleteBlock)completion
++ (void)showShareViewWith:(NSArray *)shareContents onView:(id)aView excludedList:(NSArray<UIActivityType> *)excludedList completion:(ActionCompleteBlock)completion
 {
     UIActivityViewController *activityVC =
     [[UIActivityViewController alloc] initWithActivityItems:shareContents
@@ -300,8 +300,10 @@ static MBProgressHUD *s_loadingProgress = nil;
     activityVC.excludedActivityTypes = excludedList;
     if (@available(iOS 8.0, *)) {
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-            if (aView) {
+            if ([aView isKindOfClass:UIView.class]) {
                 activityVC.popoverPresentationController.sourceView = aView;
+            } else if ([aView isKindOfClass:UIBarButtonItem.class]) {
+                activityVC.popoverPresentationController.barButtonItem = aView;
             } else {
                 activityVC.popoverPresentationController.sourceView = [[self topViewController] view];
             }
