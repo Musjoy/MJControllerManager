@@ -83,7 +83,7 @@
 {
     LogTrace(@"   >>>>>>{ %@ } did appear", NSStringFromClass([self class]));
     [super viewDidAppear:animated];
-    triggerBeginPage(NSStringFromClass([self class]));
+//    triggerBeginPage(NSStringFromClass([self class]));
     _isViewShow = YES;
     _isViewHadShow = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -100,7 +100,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     LogTrace(@"<<<<<<{ %@ } did disappear", NSStringFromClass([self class]));
-    triggerEndPage(NSStringFromClass([self class]));
+//    triggerEndPage(NSStringFromClass([self class]));
     [super viewDidDisappear:animated];
 }
 
