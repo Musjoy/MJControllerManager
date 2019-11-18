@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "MJControllerManager"
-  s.version          = "0.1.8"
+  s.version          = "0.1.9"
   s.summary          = "This module contain base class of view controller and some common use function."
 
   s.homepage         = "https://github.com/Musjoy/MJControllerManager"
